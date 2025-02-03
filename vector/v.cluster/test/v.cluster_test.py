@@ -68,7 +68,6 @@ class TestVCluster(TestCase):
 
     def test_2d_flag_effect(self):
         """Test that forcing 2D clustering with -2 flag produces different clusters from 3D clustering."""
-        
         # Run clustering in 3D
         self.assertModule("v.cluster", input="test_points_3d", output="clustered_3d", method="dbscan", distance=10, min=3, overwrite="true")
 
