@@ -32,7 +32,6 @@ class TestVCluster(TestCase):
         """Test DBSCAN2 clustering."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="optics2", distance=10, min=3, overwrite="true")
         self.assertVectorExists("clustered")
-    
     def test_density_clustering(self):
         """Test density clustering."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="density", distance=10, min=3, overwrite="true")
