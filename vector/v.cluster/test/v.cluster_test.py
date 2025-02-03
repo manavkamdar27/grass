@@ -106,6 +106,5 @@ class TestVCluster(TestCase):
         assert len(cluster_ids_3d) != len(cluster_ids_2d), "2D clustering should produce different clusters than 3D clustering."
 
 
-
 if __name__ == "__main__":
     test()
