@@ -41,7 +41,6 @@ class TestVCluster(TestCase):
         """Test invalid clustering method by ensuring only valid methods are accepted."""
         with pytest.raises(ValueError):
             self.assertModule("v.cluster", input="test_points", output="clustered", method="invalid")
-    
     def test_optics_clustering(self):
         """Test OPTICS clustering."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="optics", distance=10, min=3, overwrite="true")
