@@ -63,7 +63,6 @@ class TestVCluster(TestCase):
         # Assert that there is at least one cluster
         assert len(cluster_ids) > 0, "There should be at least one cluster in the output."
 
-    
     def test_2d_flag_effect(self):
         """Test that forcing 2D clustering with -2 flag produces different clusters from 3D clustering."""
         
