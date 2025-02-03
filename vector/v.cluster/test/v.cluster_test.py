@@ -23,6 +23,7 @@ class TestVCluster(TestCase):
         """Test DBSCAN clustering with default parameters."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="dbscan", distance=10, min=3, overwrite="true")
         self.assertVectorExists("clustered")
+
     def test_dbscan2_clustering(self):
         """Test DBSCAN2 clustering."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="dbscan2", distance=10, min=3, overwrite="true")
