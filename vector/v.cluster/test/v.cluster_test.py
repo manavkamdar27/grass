@@ -60,7 +60,6 @@ class TestVCluster(TestCase):
                 if len(parts) >= 3:  # Ensure the line has enough parts (x, y, z, cluster_id)
                     cluster_id = int(parts[2])  # Cluster ID is the 4th column
                     cluster_ids.add(cluster_id)
-        
         # Assert that there is at least one cluster
         assert len(cluster_ids)> 0, "There should be at least one cluster in the output."
 
