@@ -45,7 +45,6 @@ class TestVCluster(TestCase):
         """Test OPTICS clustering."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="optics", distance=10, min=3, overwrite="true")
         self.assertVectorExists("clustered")
-        
     def test_at_least_one_cluster(self):
         """Test that there is at least one cluster in the output."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="optics", distance=10, min=3, overwrite="true")
