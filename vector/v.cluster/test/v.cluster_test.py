@@ -3,6 +3,7 @@ from grass.gunittest.main import test
 from grass.script import core as grass
 import pytest
 
+
 class TestVCluster(TestCase):
     """Test cases for v.cluster tool in GRASS GIS."""
 
