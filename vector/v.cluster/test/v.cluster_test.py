@@ -49,7 +49,6 @@ class TestVCluster(TestCase):
         """Test that there is at least one cluster in the output."""
         self.assertModule("v.cluster", input="test_points", output="clustered", method="optics", distance=10, min=3, overwrite="true")
         self.assertVectorExists("clustered")
-        
         # Export the clustered points to ASCII format
         ascii_output = grass.read_command("v.out.ascii", input="clustered", format="point", separator="comma")
         
