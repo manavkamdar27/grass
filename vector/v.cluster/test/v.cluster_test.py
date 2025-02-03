@@ -1,4 +1,5 @@
 """Module for testing v.cluster"""
+
 import pytest
 from grass.gunittest.case import TestCase
 from grass.gunittest.main import test
@@ -14,8 +15,7 @@ class TestVCluster(TestCase):
         cls.runModule("g.region", n=100, s=0, e=100, w=0, res=10)
         cls.runModule("v.random", output="test_points", npoints=200, seed=42)
         cls.runModule(
-            "v.random", output="test_points_3d", npoints=50, zmin=0, zmax=50,
-            seed=42
+            "v.random", output="test_points_3d", npoints=50, zmin=0, zmax=50, seed=42
         )
 
     @classmethod
@@ -85,8 +85,7 @@ class TestVCluster(TestCase):
         """Test invalid clustering method."""
         with pytest.raises(ValueError, match="This is an invalid method"):
             self.assertModule(
-                "v.cluster", input="test_points", output="clustered",
-                method="invalid"
+                "v.cluster", input="test_points", output="clustered", method="invalid"
             )
 
     def test_optics_clustering(self):
@@ -132,9 +131,9 @@ class TestVCluster(TestCase):
                     cluster_ids.add(cluster_id)
 
         # Assert that there is at least one cluster
-        assert len(cluster_ids) > 0, (
-            "There should be at least one cluster in the output."
-        )
+        assert (
+            len(cluster_ids) > 0
+        ), "There should be at least one cluster in the output."
 
     def test_2d_flag_effect(self):
         """Test forcing flag produces different clusters from 3D clustering."""
@@ -168,8 +167,7 @@ class TestVCluster(TestCase):
 
         # Export the clustered points to ASCII format
         ascii_output = grass.read_command(
-            "v.out.ascii", input="clustered_3d", format="point",
-            separator="comma"
+            "v.out.ascii", input="clustered_3d", format="point", separator="comma"
         )
 
         # Parse the ASCII output to extract cluster IDs
@@ -184,8 +182,7 @@ class TestVCluster(TestCase):
                     cluster_ids_3d.add(cluster_id_3d)
 
         ascii_output_2d = grass.read_command(
-            "v.out.ascii", input="clustered_2d", format="point",
-            separator="comma"
+            "v.out.ascii", input="clustered_2d", format="point", separator="comma"
         )
 
         # Parse the ASCII output to extract cluster IDs
@@ -200,9 +197,9 @@ class TestVCluster(TestCase):
                     cluster_ids_2d.add(cluster_id_2d)
 
         # If flag works, the of clusters should differ between 2D and 3D
-        assert len(cluster_ids_3d) != len(cluster_ids_2d), (
-            "2D clustering should produce different clusters than 3D."
-        )
+        assert len(cluster_ids_3d) != len(
+            cluster_ids_2d
+        ), "2D clustering should produce different clusters than 3D."
 
 
 if __name__ == "__main__":
