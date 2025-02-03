@@ -55,7 +55,6 @@ class TestVCluster(TestCase):
         self.assertVectorExists("clustered")
         # Export the clustered points to ASCII format
         ascii_output = grass.read_command("v.out.ascii", input="clustered", format="point", separator="comma")
-        
         # Parse the ASCII output to extract cluster IDs
         cluster_ids = set()
         for line in ascii_output.splitlines():
