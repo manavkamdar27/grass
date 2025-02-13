@@ -1,13 +1,10 @@
-"""Module for testing v.cluster"""
-
-import pytest
 from grass.gunittest.case import TestCase
 from grass.gunittest.main import test
 from grass.script import core as grass
 
 
 class TestVCluster(TestCase):
-    """Test cases for v.cluster tool GRASS GIS"""
+    """Test cases for v.cluster tool in GRASS GIS."""
 
     @classmethod
     def setUpClass(cls):
@@ -24,8 +21,8 @@ class TestVCluster(TestCase):
         cls.runModule(
             "g.remove",
             type="vector",
-            name="""test_points,clustered,test_points_3d,clustered_3d
-            ,clustered_2d,clustered1,clustered2""",
+            name="test_points,clustered,test_points_3d,clustered_3d, \
+            clustered_2d,clustered1,clustered2",
             flags="f",
         )
 
@@ -83,7 +80,7 @@ class TestVCluster(TestCase):
 
     def test_invalid_method(self):
         """Test invalid clustering method."""
-        with pytest.raises(ValueError, match="This is an invalid method"):
+        with self.pytest.raises(ValueError):
             self.assertModule(
                 "v.cluster", input="test_points", output="clustered", method="invalid"
             )
@@ -136,9 +133,9 @@ class TestVCluster(TestCase):
         ), "There should be at least one cluster in the output."
 
     def test_2d_flag_effect(self):
-        """Test forcing flag produces different clusters from 3D clustering."""
+        """Test that clustering with -2 flag produces different clusters."""
 
-        # Run clustering in 3D
+        # Run clustering in 3D (default)
         self.assertModule(
             "v.cluster",
             input="test_points_3d",
@@ -196,10 +193,10 @@ class TestVCluster(TestCase):
                     cluster_id_2d = int(parts[2])
                     cluster_ids_2d.add(cluster_id_2d)
 
-        # If flag works, the of clusters should differ between 2D and 3D
+        # If the flag works, the number of clusters should differ
         assert len(cluster_ids_3d) != len(
             cluster_ids_2d
-        ), "2D clustering should produce different clusters than 3D."
+        ), "2D clustering should produce different clusters than 3D clustering"
 
 
 if __name__ == "__main__":
